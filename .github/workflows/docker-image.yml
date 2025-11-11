@@ -1,0 +1,23 @@
+#Docker CI/CD automation in GitHub Actions streamlines building, testing, and deploying containerized applications.
+#Developers define workflows in YAML files that automatically trigger on code changes. Actions handle steps like building Docker images,
+#running tests, pushing images to registries, and deploying to environments. This approach ensures consistent, repeatable builds,
+#faster feedback, and seamless integration across development, staging, and production environments within a fully automated DevOps pipeline.
+
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag rpagds/demo-app:latest
